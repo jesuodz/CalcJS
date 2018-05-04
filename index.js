@@ -1,0 +1,1 @@
+$(document).ready(function(){$("button").on("click",function(){var l,n,o=this.value;console.log(o),l=o,n=$("#display").value.split(""),(n+=l).join(""),$("#display").val(n)})});
