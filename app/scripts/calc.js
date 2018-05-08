@@ -18,7 +18,13 @@ $(document).ready( function() {
         console.log(flag);
     }
     function evalInput() {
+        try {
         result = eval(input.join(''));
+        } catch(error) {
+            if (error instanceof SyntaxError) {
+                input.pop();
+            }
+        }
         clear();
         input.push(result);
         display.val(result);
