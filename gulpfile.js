@@ -8,12 +8,11 @@ const gulp = require('gulp'),
     deploy = require('gulp-gh-pages');
 
 const src = 'app/';
-const libs = 'src/lib/';
 const dist = 'dist/';
 
 gulp.task('clean', function() {
     return del.sync('dist');
-})
+});
 
 gulp.task('html', () => {
     return gulp.src(src + 'html/*.html')
@@ -40,13 +39,12 @@ gulp.task('css', () => {
 
 gulp.task('uglifyjs', () => {
 
-    var js_libs = gulp.src( libs + '*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest(dist));
-
     var scripts = gulp.src( src + 'scripts/*.js')
         .pipe(uglify())
         .pipe(rename('index.js'))
+        .pipe(gulp.dest(dist));
+    var js_libs = gulp.src( src + '/lib/*.js')
+        .pipe(uglify())
         .pipe(gulp.dest(dist));
     
     return (js_libs, scripts)
@@ -68,10 +66,10 @@ gulp.task('browserSync', () => {
     })
 });
 
-gulp.task('watch', ['browserSync', 'css', 'html', 'uglifyjs', 'fonts'], () => {
+gulp.task('watch', ['browserSync', 'uglifyjs', 'css', 'fonts', 'html'], () => {
     gulp.watch(src + 'stylesheets/*.css', ['css']);
     gulp.watch(
-        [src + 'scripts/*.js', libs + '*.js'],
+        [src + 'scripts/*.js', src + 'lib/*.js'],
         ['uglifyjs']);
     gulp.watch(src + 'html/*.html', ['html'])
 });
