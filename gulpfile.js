@@ -76,7 +76,7 @@ gulp.task('watch', ['browserSync', 'uglifyjs', 'css', 'fonts', 'html'], () => {
 
 gulp.task('deploy', function() {
     return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+    .pipe(deploy());
 });
 
 gulp.task('default', ['watch', 'clean']);
