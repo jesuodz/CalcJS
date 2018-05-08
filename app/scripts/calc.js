@@ -4,6 +4,7 @@ $(document).ready( function() {
     var display = $('#display');
     var input = [];
     var flag = true;
+    var result;
 
     var operations = {
         'addButton' : '+',
@@ -17,7 +18,7 @@ $(document).ready( function() {
         console.log(flag);
     }
     function evalInput() {
-        var result = eval(input.join(''));
+        result = eval(input.join(''));
         clear();
         input.push(result);
         display.val(result);
@@ -57,11 +58,7 @@ $(document).ready( function() {
                 debugFunction();
                 break;
             case "equalsButton":
-                result = eval(input.join(''));
-                display.val(result);
-                clear();
-                input.push(result);
-
+                evalInput();
                 flag = false;
 
                 debugFunction();
