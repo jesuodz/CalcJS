@@ -3,7 +3,8 @@ $(document).ready( function() {
     var operationButton = $('button:not([value])');
     var display = $('#display');
     var input = [];
-    var flag = true;
+    var afterEqualOp = true;
+    var previousOperation = 0;
     var result;
 
     var operations = {
@@ -13,10 +14,6 @@ $(document).ready( function() {
         'multiplyButton' : '*'
     };
 
-    function debugFunction() {
-        console.log(input);
-        console.log(flag);
-    }
     function evalInput() {
         try {
         result = eval(input.join(''));
@@ -25,15 +22,24 @@ $(document).ready( function() {
                 input.pop();
             }
         }
+        
+        if (input.length > 2) {
+            previousOperation = input.slice(1).join('');
+        } else if (previousOperation.length >= 2 && !afterEqualOp) {
+            result = eval(result+previousOperation);
+        }
+
         clear();
         input.push(result);
         display.val(result);
     }
+
     function isNumeric(item) {
         return !isNaN(parseFloat(item)) && isFinite(item);
     }
+
     function clear() {
-        flag = true;
+        afterEqualOp = true;
         input = [];
     }
 
@@ -43,14 +49,13 @@ $(document).ready( function() {
         if (!isNumeric(input[input.length - 1])) {
             display.val("");
         }
-        if (!flag) {
+        if (!afterEqualOp) {
             display.val("");
             clear();
         }
 
         display.val(display.val() + operating);
-        input.push(String(operating));
-        debugFunction();
+        input.push(operating);
     });
 
     operationButton.click(function() {
@@ -61,18 +66,15 @@ $(document).ready( function() {
             case "clearButton":
                 display.val("");
                 clear();
-                debugFunction();
                 break;
             case "equalsButton":
                 evalInput();
-                flag = false;
-
-                debugFunction();
+                afterEqualOp = false;
                 break;
             default:
+                afterEqualOp = true;
                 evalInput();
                 input.push(operations[operator]);
-                debugFunction();
                 break;
         }
     });
