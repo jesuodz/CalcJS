@@ -4,7 +4,7 @@ $(document).ready( function() {
     var display = $('#display');
     var input = [];
     var afterEqualOp = true;
-    var previousOperation = [];
+    var previousOperation = 0;
     var result;
 
     var operations = {
@@ -13,10 +13,6 @@ $(document).ready( function() {
         'divideButton' : '/',
         'multiplyButton' : '*'
     };
-
-    function debugFunction() {
-       console.log(input);
-    }
 
     function evalInput() {
         try {
@@ -29,17 +25,20 @@ $(document).ready( function() {
         }
         
         if (input.length > 2) {
-            previousOperation.push(input.slice(1,3));
-            console.log(previousOperation);
+            previousOperation = input.slice(1).join('');
+        } else if (previousOperation.length >= 2 && !afterEqualOp) {
+            result = eval(result+previousOperation);
         }
 
         clear();
         input.push(result);
         display.val(result);
     }
+
     function isNumeric(item) {
         return !isNaN(parseFloat(item)) && isFinite(item);
     }
+
     function clear() {
         afterEqualOp = true;
         input = [];
@@ -74,6 +73,7 @@ $(document).ready( function() {
                 afterEqualOp = false;
                 break;
             default:
+                afterEqualOp = true;
                 evalInput();
                 input.push(operations[operator]);
                 break;
