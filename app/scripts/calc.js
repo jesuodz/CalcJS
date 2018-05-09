@@ -3,7 +3,8 @@ $(document).ready( function() {
     var operationButton = $('button:not([value])');
     var display = $('#display');
     var input = [];
-    var flag = true;
+    var afterEqualOp = true;
+    var previousOperation = [];
     var result;
 
     var operations = {
@@ -14,17 +15,24 @@ $(document).ready( function() {
     };
 
     function debugFunction() {
-        console.log(input);
-        console.log(flag);
+       console.log(input);
     }
+
     function evalInput() {
         try {
-        result = eval(input.join(''));
+            result = eval(input.join(''));
         } catch(error) {
+            /* handle exception e.g 86+ is not evaluated */
             if (error instanceof SyntaxError) {
                 input.pop();
             }
         }
+        
+        if (input.length > 2) {
+            previousOperation.push(input.slice(1,3));
+            console.log(previousOperation);
+        }
+
         clear();
         input.push(result);
         display.val(result);
@@ -33,46 +41,41 @@ $(document).ready( function() {
         return !isNaN(parseFloat(item)) && isFinite(item);
     }
     function clear() {
-        flag = true;
+        afterEqualOp = true;
         input = [];
     }
 
     numberButton.click(function() {
-        var operating = $(this).attr("value");
+        var operand = $(this).attr("value");
 
         if (!isNumeric(input[input.length - 1])) {
+            /* Check if last item is an operand */
             display.val("");
         }
-        if (!flag) {
+        if (!afterEqualOp) {
             display.val("");
             clear();
         }
-
-        display.val(display.val() + operating);
-        input.push(String(operating));
-        debugFunction();
+        
+        display.val(display.val() + operand);
+        input.push(operand);
     });
 
     operationButton.click(function() {
         var operator = $(this).attr("id");
-        var result;
 
         switch(operator) {
             case "clearButton":
                 display.val("");
                 clear();
-                debugFunction();
                 break;
             case "equalsButton":
                 evalInput();
-                flag = false;
-
-                debugFunction();
+                afterEqualOp = false;
                 break;
             default:
                 evalInput();
                 input.push(operations[operator]);
-                debugFunction();
                 break;
         }
     });
