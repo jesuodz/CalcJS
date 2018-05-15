@@ -34,13 +34,59 @@ body {
 .text-center {
     text-align: center;
 }
+/* Form elements */
+button,
+input {
+    width: 100%;
+    font-family: 'Roboto';
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+}
+.buttons {
+    margin-top: 15px;
+}
 button {
-    font-size: 200%;
-    width: 40px;
+    padding: 5px 5px;
+    font-size: 2.4rem;
+}
+input {
+    height: 4rem;
+    padding-right: 12px;
+    font-size: 2rem;
+    text-align: right;
+}   border-radius: 0px;
+}
+.buttons {
+    margin-top: 15px;
+}
+button {
+    padding: 5px 5px;
+    font-size: 2.4rem;
+}
+input {
+    height: 4rem;
+    padding-right: 12px;
+    font-size: 2rem;
+    text-align: right;
 }
 
-input {
-    font-size: 14px;
-    height: 40px;
-    text-align: right;
+/* Header */
+h1 {
+    font-size: 3.5rem;
+    color: #ececec;
+}
+
+/* Footer */
+footer {
+    font-family: 'Lato Light';
+}
+
+/* Links */
+a {
+    color: inherit;
+}
+a:hover {
+    color: #e2e2e2;
 }
