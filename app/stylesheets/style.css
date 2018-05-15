@@ -45,14 +45,41 @@ input {
     background: none;
     box-shadow: none;
     border-radius: 0px;
+    outline: none;
 }
 .buttons {
     margin-top: 15px;
 }
 button {
+    position: relative;
+    width: 25%;
     padding: 5px 5px;
     font-size: 2.4rem;
     color: #ececec;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    cursor: pointer;
+}
+button:after {
+    content: "";
+    background: #b6d3dd;
+    display: block;
+    position: absolute;
+    padding-bottom: 300%;
+    padding-right: 350%;
+    margin-right: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+    border: 0;
 }
 input {
     height: 4rem;
@@ -67,10 +94,6 @@ input {
 h1 {
     font-size: 3.5rem;
     color: #ececec;
-}
-footer {
-    position: relative;
-    bottom: 0;
 }
 /* Links */
 a {
