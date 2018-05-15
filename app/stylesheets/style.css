@@ -10,6 +10,30 @@
     font-family: 'Roboto';
     src: url(fonts/Roboto/Roboto-Regular.ttf);
 }
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+body {
+    background-color: #19647e;
+    font-family: Lato;
+}
+
+/* Grid */
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    padding: 0 1.5rem;
+}
+.button-container {
+    display: flex;
+}
+.text-center {
+    text-align: center;
+}
 button {
     font-size: 200%;
     width: 40px;
