@@ -34,6 +34,7 @@ body {
 .text-center {
     text-align: center;
 }
+
 /* Form elements */
 button,
 input {
@@ -43,20 +44,6 @@ input {
     background: none;
     box-shadow: none;
     border-radius: 0px;
-}
-.buttons {
-    margin-top: 15px;
-}
-button {
-    padding: 5px 5px;
-    font-size: 2.4rem;
-}
-input {
-    height: 4rem;
-    padding-right: 12px;
-    font-size: 2rem;
-    text-align: right;
-}   border-radius: 0px;
 }
 .buttons {
     margin-top: 15px;
