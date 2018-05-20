@@ -39,18 +39,26 @@ button::-moz-focus-inner{
 *:before {
     box-sizing: border-box;
 }
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
 body {
     background-color: #19647e;
     font-family: 'Lato Light';
+    margin: 0;
 }
 
 /* Grid */
 .container {
+    height: 100%;
     display: flex;
-    flex-flow: column wrap;
-    align-content: center;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
     padding: 0 1rem;
-    margin: 0 auto;
+    margin-top: -32px;
 }
 .input-container {
     padding: 0 0.8rem;
@@ -58,8 +66,20 @@ body {
 .button-container {
     display: flex;
 }
-.text-center {
-    text-align: center;
+.container header {
+    order: 1;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+.container section {
+    order: 2;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+.container footer {
+    order: 3;
+    flex: 0 1 auto;
+    align-self: auto;
 }
 
 /* Form elements */
@@ -106,7 +126,6 @@ button:active:after {
     opacity: 1;
     transition: 0s;
     border: 0;
-    outline: 0;
 }
 input {
     height: 4rem;
@@ -121,7 +140,9 @@ input {
 h1 {
     font-size: 3.5rem;
     color: #ececec;
+    padding-bottom: 17px;
 }
+
 /* Links */
 a {
     color: inherit;
