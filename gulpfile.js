@@ -1,6 +1,5 @@
 const gulp = require('gulp'),
-    del = require('del');
-    rename = require('gulp-rename'),
+    del = require('del'),
     htmlmin = require('gulp-htmlmin'),
     cleanCSS = require('gulp-clean-css'),
     uglify = require('gulp-uglify'),
@@ -20,7 +19,6 @@ gulp.task('html', () => {
             collapseWhitespace: true,
             removeComments: true,
         }))
-        .pipe(rename('index.html'))
         .pipe(gulp.dest(dist))
         .pipe(browserSync.reload({
             stream: true
@@ -30,7 +28,6 @@ gulp.task('html', () => {
 gulp.task('css', () => {
     return gulp.src( src + 'stylesheets/*.css')
         .pipe(cleanCSS())
-        .pipe(rename('main.css'))
         .pipe(gulp.dest(dist))
         .pipe(browserSync.reload({
             stream: true
@@ -41,7 +38,6 @@ gulp.task('uglifyjs', () => {
 
     var scripts = gulp.src( src + 'scripts/*.js')
         .pipe(uglify())
-        .pipe(rename('index.js'))
         .pipe(gulp.dest(dist));
     var js_libs = gulp.src( src + '/lib/*.js')
         .pipe(uglify())
