@@ -16,7 +16,7 @@ $(document).ready( function() {
 
     function evalInput() {
         try {
-        result = eval(input.join(''));
+            result = eval(input.join(''));
         } catch(error) {
             if (error instanceof SyntaxError) {
                 input.pop();
